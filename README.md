@@ -8,6 +8,9 @@
 - [x] Edit Book
 - [ ] Delete Book
 
+### Requirements
+- Internet Connection for the CDNs
+
 ### How to start?
 - Step 1: Download the Files.
 - Step 2: Open <b>index.html</b> on a browser.

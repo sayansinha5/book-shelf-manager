@@ -3,6 +3,11 @@
 - Exploring <b>BootStrap 5 (v5.0.0-beta1)</b>.
 - A Total ES based Test project.
 
+### Current Features
+- [x] Add Book
+- [x] Edit Book
+- [ ] Delete Book
+
 ### How to start?
 - Step 1: Download the Files.
 - Step 2: Open <b>index.html</b> on a browser.

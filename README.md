@@ -9,7 +9,7 @@
 - [x] Add Book
 - [x] Edit Book
 - [x] Delete Book
-- [ ] More Features Coming ...
+- [ ] More Features Coming Soon...
 
 ### Requirements
 - Internet Connection for the CDNs

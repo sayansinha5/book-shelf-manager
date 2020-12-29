@@ -17,8 +17,8 @@
 	<body>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-1"></div>
-				<div class="col-md-10">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
 					<div class="card">
 						<div class="card-body">
 							<div class="row">
@@ -27,15 +27,15 @@
 								</div>
 								<div class="col-md-6">
 									<div class="float-end">
-										<button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addBook">Add Book</button>
-										<button class="btn btn-link btn-sm">About</button>
+										<button class="btn btn-success btn-sm" id="addBookWindow" data-bs-toggle="modal" data-bs-target="#addBook">Add Book</button>
+										<button class="btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#about">About</button>
 									</div>
 								</div>
 							</div>
 							<hr />
 							<div class="row">
 								<div class="col-md-12">
-									<div class="table-responsive" style="font-size: 14px;">
+									<div class="table-responsive-md" style="font-size: 14px;">
 										<table class="table table-hover">
 											<thead>
 												<tr>
@@ -55,8 +55,9 @@
 							</div>
 						</div>
 					</div>
+					<p class="text-center" style="font-size: 12px;">@mb <span class="text-primary"> #yearEndCommit</span> 2020</p>
 				</div>
-				<div class="col-md-1"></div>
+				<div class="col-md-2"></div>
 			</div>
 		</div>
 		
@@ -152,7 +153,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" id="edit_save_book">Save Book</button>
+						<button type="button" class="btn btn-primary btn-sm" id="edit_save_book">Save Book</button>
 					</div>
 				</div>
 			</div>
@@ -169,7 +170,7 @@
 									<p>
 										You Sure want to remove the following book ?
 										<br />
-										<strong><span id="delete_book_title">Hit Refresh</span></strong> by <strong><span id="delete_book_author">Satya Nadella.</span></strong>
+										<strong><span id="delete_book_title"></span></strong> by <strong><span id="delete_book_author"></span></strong>
 									</p>
 									<div>
 										<button class="btn btn-success btn-sm" id="deleteBookBtn" data-bs-toggle="modal" data-bs-target="#deleteBook" data-bs-dismiss="modal" aria-label="Close">Yes</button>&nbsp;
@@ -204,17 +205,39 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Modal About -->
+		<div class="modal fade" id="about" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-size: 14px;">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="card card-body text-center">
+							<h5>Book Shelf Manager</h5>
+							<p>A total ECMAScript based test project, exploring <strong>BootStrap 5 (v5.0.0-beta1)</strong>.</p>
+							<p><i class="fab fa-github fa-lg fa-fw"></i> <a style="text-decoration: none;" href="https://github.com/sayansinha5/books-manager">sayansinha5/books-manager</a></p>
+							<button class="btn btn-primary btn-sm" data-bs-dismiss="modal" aria-label="Close">okay buddy!</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 		
 		<script>
-			var arr_book_title=['Hit Refresh'], arr_book_author_name=['Satya Nadella'], arr_book_genre=[3], arr_book_description=['About his personal life and reflects light on life of Microsoft.'];
-			var available_book_genre=['Select Genre','Horror', 'Love', 'Tech', 'Thriller', 'Detective', 'Self Help'];
+			var arr_book_title=['Hit Refresh', 'She Friendzoned My Love', 'Letters to My Ex', 'Best Couple Ever', 'Stranger Series', 'Love a Little Stronger', 'A Clear Blue Sky'], arr_book_author_name=['Satya Nadella', 'Sudeep Nagarkar', 'Nikita Singh', 'Novoneel Chakraborty', 'Novoneel Chakraborty', 'Preeti Shenoy', 'N.R.Narayana Murthy'], arr_book_genre=[3, 8, 2], arr_book_description=['The Quest to Rediscover Microsoft\'s Soul and Imagine a Better Future for Everyone.'];
+			var available_book_genre=['Select Genre','Horror', 'Love', 'Tech', 'Thriller', 'Detective', 'Love, Thrill & Murder', 'Love & Thriller', 'Romantic', 'Poetry', 'Life', 'Self Help'];
 			var book_row = "";
+			
+			var flag_book_title = 0, flag_author = 0, flag_genre = 0;
+			var flag_edit_book_title = 1, flag_edit_author = 1, flag_edit_genre = 1;
 			
 			var editBookId = "";
 			var deleteBookId = "";
+			
+			getBookShelf();
 			
 			function emptyAddBookForm()
 			{
@@ -233,34 +256,36 @@
 			
 			function cleanArray(array_name)
 			{
-				array_name.filter(el => { 
+				var filteredArray = array_name.filter(el => { 
 					return el != null && el != '';
 				});
+				
+				return filteredArray;
 			}
 			
-			var flag_book_title = 0, flag_author = 0, flag_genre = 0;
-			var flag_edit_book_title = 1, flag_edit_author = 1, flag_edit_genre = 1;
-			
-			$(document).ready(function(){
-				
-			//============================================================================================
+			function getBookShelf()
+			{
 				var shelf_size = arr_book_title.length;
 				
 				if(shelf_size != 0)
 				{
+					book_row = "";
 					for(var j=0; j < shelf_size; j++)
 					{
-						book_row += '<tr><td>'+(j+1)+'</td><td>'+(arr_book_title[j])+'</td><td>'+arr_book_author_name[j]+'</td><td>'+available_book_genre[arr_book_genre[j]]+'</td><td>'+arr_book_description[j]+'</td><td><button class="btn btn-primary btn-sm editBookBtn" data-bs-toggle="modal" data-bs-target="#editBook" data-bookId="'+j+'"><i class="fa fa-pencil-alt fa-fw"></i></button> <button class="btn btn-danger btn-sm deleteBookConfirm" data-bs-toggle="modal" data-bs-target="#deleteBookConfirm" data-bookId="'+j+'"><i class="fa fa-trash fa-fw"></i></button></td></tr>';
+						book_row += '<tr><td><strong>'+(j+1)+'</strong></td><td>'+(arr_book_title[j])+'</td><td>'+arr_book_author_name[j]+'</td><td>'+available_book_genre[arr_book_genre[j]]+'</td><td>'+arr_book_description[j]+'</td><td> <div class="btn-group" role="group"> <button class="btn btn-outline-primary btn-sm editBookBtn" data-bs-toggle="modal" data-bs-target="#editBook" data-bookId="'+j+'"><i class="fa fa-pencil-alt fa-fw"></i></button><button class="btn btn-outline-danger btn-sm deleteBookConfirm" data-bs-toggle="modal" data-bs-target="#deleteBookConfirm" data-bookId="'+j+'"><i class="fa fa-trash fa-fw"></i></button> </div> </td></tr>';
 					}
 					$('#table_data').empty();
 					$('#table_data').append(book_row);
 				}
 				else
 				{
+					$('#table_data').empty();
 					$('#table_data').append('<tr><td colspan="6"><p class="alert alert-warning text-center">Empty Shelf!<br/>Use &nbsp;<button class="btn btn-success btn-sm">Add Book</button> &nbsp;to add a new book to your shelf.</p></td></tr>');
 				}
-			//============================================================================================
-			//============================================================================================
+			}
+			
+			function getBookGenre()
+			{
 				var book_genre_length = available_book_genre.length;
 				for(var i=0; i<book_genre_length; i++)
 				{
@@ -269,7 +294,16 @@
 					else
 						$('#genre, #edit_genre').append('<option value="'+i+'">'+available_book_genre[i]+'</option>');
 				}
-			//==============================================================================================
+			}
+			
+			$(document).ready(function(){
+				
+				 getBookGenre();
+				 
+				 $(document).on('mouseup', '#addBookWindow, .editBookBtn', function(){
+					$('#notif_msg').empty();
+					$('#edit_notif_msg').empty();
+				 });
 				
 				$('#book_title').keyup(function(){
 					
@@ -395,13 +429,7 @@
 						else
 							arr_book_description.push(book_description);
 						
-						for(var j=0; j < arr_book_title.length; j++)
-						{
-							book_row += '<tr><td>'+(j+1)+'</td><td>'+(arr_book_title[j])+'</td><td>'+arr_book_author_name[j]+'</td><td>'+available_book_genre[arr_book_genre[j]]+'</td><td>'+arr_book_description[j]+'</td><td><button class="btn btn-primary btn-sm editBookBtn" data-bs-toggle="modal" data-bs-target="#editBook" data-bookId="'+j+'"><i class="fa fa-pencil-alt fa-fw"></i></button> <button class="btn btn-danger btn-sm deleteBookConfirm" data-bs-toggle="modal" data-bs-target="#deleteBookConfirm" data-bookId="'+j+'"><i class="fa fa-trash fa-fw"></i></button></td></tr>';
-						}
-						
-						$('#table_data').empty();
-						$('#table_data').append(book_row);
+						getBookShelf();
 						
 						emptyAddBookForm();
 						
@@ -545,13 +573,7 @@
 						else
 							arr_book_description[editBookId] = edit_book_description;
 						
-						for(var j=0; j < arr_book_title.length; j++)
-						{
-							book_row += '<tr><td>'+(j+1)+'</td><td>'+(arr_book_title[j])+'</td><td>'+arr_book_author_name[j]+'</td><td>'+available_book_genre[arr_book_genre[j]]+'</td><td>'+arr_book_description[j]+'</td><td><button class="btn btn-primary btn-sm editBookBtn" data-bs-toggle="modal" data-bs-target="#editBook" data-bookId="'+j+'"><i class="fa fa-pencil-alt fa-fw"></i></button> <button class="btn btn-danger btn-sm deleteBookConfirm" data-bs-toggle="modal" data-bs-target="#deleteBookConfirm" data-bookId="'+j+'"><i class="fa fa-trash fa-fw"></i></button></td></tr>';
-						}
-						
-						$('#table_data').empty();
-						$('#table_data').append(book_row);
+						getBookShelf();
 						
 						$('#edit_notif_msg').html('<div class="alert alert-success alert-dismissible fade show" role="alert">Book Details Updated!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
 					}
@@ -565,38 +587,24 @@
 				$(document).on('mouseup', '.deleteBookConfirm', function(){
 					deleteBookId = $(this).attr('data-bookId');
 					
-					$('#delete_book_title').val(arr_book_title[deleteBookId]);
-					$('#delete_book_author').val(arr_book_author_name[deleteBookId]);
-					
-					arr_book_title[deleteBookId] = "";
-					arr_book_author_name[deleteBookId] = "";
-					arr_book_genre[deleteBookId] = ""
-					arr_book_description[deleteBookId] = "";
+					$('#delete_book_title').html(arr_book_title[deleteBookId]);
+					$('#delete_book_author').html(arr_book_author_name[deleteBookId]);
 					
 				});
 				
 				$(document).on('mouseup', '#deleteBookBtn', function(){
 					
-					book_row = "";
-					arr_book_title[deleteBookId] = "";
-					arr_book_author_name[deleteBookId] = "";
-					arr_book_genre[deleteBookId] = ""
-					arr_book_description[deleteBookId] = "";
+					delete arr_book_title[deleteBookId];
+					delete arr_book_author_name[deleteBookId];
+					delete arr_book_genre[deleteBookId];
+					delete arr_book_description[deleteBookId];
 					
 					arr_book_title = cleanArray(arr_book_title);
 					arr_book_author_name = cleanArray(arr_book_author_name);
 					arr_book_genre = cleanArray(arr_book_genre);
 					arr_book_description = cleanArray(arr_book_description);
 					
-					console.log(arr_book_title);
-					
-					for(var j=0; j < arr_book_title.length; j++)
-					{
-						book_row += '<tr><td>'+(j+1)+'</td><td>'+(arr_book_title[j])+'</td><td>'+arr_book_author_name[j]+'</td><td>'+available_book_genre[arr_book_genre[j]]+'</td><td>'+arr_book_description[j]+'</td><td><button class="btn btn-primary btn-sm editBookBtn" data-bs-toggle="modal" data-bs-target="#editBook" data-bookId="'+j+'"><i class="fa fa-pencil-alt fa-fw"></i></button> <button class="btn btn-danger btn-sm deleteBookConfirm" data-bs-toggle="modal" data-bs-target="#deleteBookConfirm" data-bookId="'+j+'"><i class="fa fa-trash fa-fw"></i></button></td></tr>';
-					}
-						
-					$('#table_data').empty();
-					$('#table_data').append(book_row);
+					getBookShelf();
 				});
 			});
 		</script>

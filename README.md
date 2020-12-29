@@ -9,6 +9,7 @@
 - [x] Add Book
 - [x] Edit Book
 - [x] Delete Book
+- [ ] More Features Coming ...
 
 ### Requirements
 - Internet Connection for the CDNs
@@ -19,7 +20,7 @@
 
 ### All Done!
 
-## Project Screenshots
+## You might like to take a walk
 
 ### 1. Main Screen
 <img src="main/ss/01SS.png" height="450" />

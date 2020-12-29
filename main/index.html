@@ -15,6 +15,7 @@
 		</style>
 	</head>
 	<body>
+		<br />
 		<div class="container">
 			<div class="row">
 				<div class="col-md-2"></div>
@@ -23,11 +24,11 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-md-6">
-									<h4>Books Manager</h4>
+									<h4><i class="fa fa-book"></i> Book Shelf</h4>
 								</div>
 								<div class="col-md-6">
 									<div class="float-end">
-										<button class="btn btn-success btn-sm" id="addBookWindow" data-bs-toggle="modal" data-bs-target="#addBook">Add Book</button>
+										<button class="btn btn-success btn-sm" id="addBookWindow" data-bs-toggle="modal" data-bs-target="#addBook"><i class="fa fa-plus"></i> Add Book</button>
 										<button class="btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#about">About</button>
 									</div>
 								</div>
@@ -55,7 +56,7 @@
 							</div>
 						</div>
 					</div>
-					<p class="text-center" style="font-size: 12px;">@mb <span class="text-primary"> #yearEndCommit</span> 2020</p>
+					<p class="text-center" style="font-size: 13px;">@sayansinha5 <span class="text-primary"> #yearEndCommit</span> 2020</p>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
@@ -213,8 +214,15 @@
 					<div class="modal-body">
 						<div class="card card-body text-center">
 							<h5>Book Shelf Manager</h5>
-							<p>A total ECMAScript based test project, exploring <strong>BootStrap 5 (v5.0.0-beta1)</strong>.</p>
-							<p><i class="fab fa-github fa-lg fa-fw"></i> <a style="text-decoration: none;" href="https://github.com/sayansinha5/books-manager">sayansinha5/books-manager</a></p>
+							<p>
+								ECMAScript based test project, exploring <strong>BootStrap 5</strong>.
+								<br />
+								Any Idea how could we make this project into something useful?
+							</p>
+							<p>
+								<i class="fab fa-bootstrap fa-lg fa-fw"></i>  v5.0.0-beta1
+								<br />
+								<i class="fab fa-github fa-lg fa-fw"></i> <a style="text-decoration: none;" href="https://github.com/sayansinha5/books-manager">sayansinha5/books-manager</a></p>
 							<button class="btn btn-primary btn-sm" data-bs-dismiss="modal" aria-label="Close">okay buddy!</button>
 						</div>
 					</div>
@@ -227,8 +235,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 		
 		<script>
-			var arr_book_title=['Hit Refresh', 'She Friendzoned My Love', 'Letters to My Ex', 'Best Couple Ever', 'Stranger Series', 'Love a Little Stronger', 'A Clear Blue Sky'], arr_book_author_name=['Satya Nadella', 'Sudeep Nagarkar', 'Nikita Singh', 'Novoneel Chakraborty', 'Novoneel Chakraborty', 'Preeti Shenoy', 'N.R.Narayana Murthy'], arr_book_genre=[3, 8, 2], arr_book_description=['The Quest to Rediscover Microsoft\'s Soul and Imagine a Better Future for Everyone.'];
-			var available_book_genre=['Select Genre','Horror', 'Love', 'Tech', 'Thriller', 'Detective', 'Love, Thrill & Murder', 'Love & Thriller', 'Romantic', 'Poetry', 'Life', 'Self Help'];
+			var arr_book_title=['Hit Refresh', 'Letters to My Ex', 'Stranger Series', 'Love a Little Stronger', 'A Clear Blue Sky', 'Make any Girl your GF'], arr_book_author_name=['Satya Nadella', 'Nikita Singh', 'Novoneel Chakraborty', 'Preeti Shenoy', 'N.R.Narayana Murthy', 'Chonga'], arr_book_genre=[3, 2, 6, 9, 8, 10], arr_book_description=['The Quest to Rediscover Microsoft\'s Soul and Imagine a Better Future for Everyone.', 'A Story of heartbreak and things Left unsaid.', 'One of the Best Series from the master of Love and Thriller.', 'Positive and Full of Life.', 'Stories and Poems on Conflict and Hope.', '<strong>100% effective</strong> guide to make any girl your own.'];
+			var available_book_genre=['Select Genre','Horror', 'Love', 'Tech', 'Thriller', 'Detective', 'Love & Thrill', 'Romantic', 'Poetry', 'Life', 'Self Help'];
 			var book_row = "";
 			
 			var flag_book_title = 0, flag_author = 0, flag_genre = 0;
@@ -272,7 +280,7 @@
 					book_row = "";
 					for(var j=0; j < shelf_size; j++)
 					{
-						book_row += '<tr><td><strong>'+(j+1)+'</strong></td><td>'+(arr_book_title[j])+'</td><td>'+arr_book_author_name[j]+'</td><td>'+available_book_genre[arr_book_genre[j]]+'</td><td>'+arr_book_description[j]+'</td><td> <div class="btn-group" role="group"> <button class="btn btn-outline-primary btn-sm editBookBtn" data-bs-toggle="modal" data-bs-target="#editBook" data-bookId="'+j+'"><i class="fa fa-pencil-alt fa-fw"></i></button><button class="btn btn-outline-danger btn-sm deleteBookConfirm" data-bs-toggle="modal" data-bs-target="#deleteBookConfirm" data-bookId="'+j+'"><i class="fa fa-trash fa-fw"></i></button> </div> </td></tr>';
+						book_row += '<tr><td><strong>'+(j+1)+'.</strong></td><td>'+(arr_book_title[j])+'</td><td>'+arr_book_author_name[j]+'</td><td>'+available_book_genre[arr_book_genre[j]]+'</td><td>'+arr_book_description[j]+'</td><td> <div class="btn-group" role="group"> <button class="btn btn-outline-primary btn-sm editBookBtn" data-bs-toggle="modal" data-bs-target="#editBook" data-bookId="'+j+'"><i class="fa fa-pencil-alt fa-fw"></i></button><button class="btn btn-outline-danger btn-sm deleteBookConfirm" data-bs-toggle="modal" data-bs-target="#deleteBookConfirm" data-bookId="'+j+'"><i class="fa fa-trash fa-fw"></i></button> </div> </td></tr>';
 					}
 					$('#table_data').empty();
 					$('#table_data').append(book_row);

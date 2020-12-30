@@ -245,8 +245,9 @@
 			var editBookId = "";
 			var deleteBookId = "";
 			
-			getBookShelf();
+			getBookShelf(); // Updating the Rows
 			
+			//for emptying/resetting the form
 			function emptyAddBookForm()
 			{
 				document.getElementById('book_title').value="";
@@ -262,6 +263,7 @@
 				flag_book_title = flag_author  = flag_genre = 0;
 			}
 			
+			// for cleaning the array in order to avoid holes
 			function cleanArray(array_name)
 			{
 				var filteredArray = array_name.filter(el => { 
@@ -271,6 +273,7 @@
 				return filteredArray;
 			}
 			
+			// for updating the Rows
 			function getBookShelf()
 			{
 				var shelf_size = arr_book_title.length;

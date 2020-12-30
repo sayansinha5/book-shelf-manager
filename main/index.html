@@ -295,6 +295,7 @@
 				}
 			}
 			
+			// Getting the available book genre
 			function getBookGenre()
 			{
 				var book_genre_length = available_book_genre.length;
@@ -309,8 +310,9 @@
 			
 			$(document).ready(function(){
 				
-				 getBookGenre();
+				 getBookGenre(); //updating the genre
 				 
+				// Managing the Notification messages
 				 $(document).on('mouseup', '#addBookWindow, .editBookBtn', function(){
 					$('#notif_msg').empty();
 					$('#edit_notif_msg').empty();

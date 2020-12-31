@@ -9,6 +9,7 @@
 - [x] Add Book
 - [x] Edit Book
 - [x] Delete Book
+- [ ] Still in Development
 - [ ] More Features Coming Soon...
 
 ### Requirements

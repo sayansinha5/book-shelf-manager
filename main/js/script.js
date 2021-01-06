@@ -221,6 +221,9 @@ $(document).ready(function(){
 		$('#edit_genre option[value="'+arr_book_genre[editBookId]+'"]').attr("selected", "selected");
 		$('#edit_description').val(arr_book_description[editBookId]);
 		
+		$('#edit_book_title_char_count').html(50 - arr_book_title[editBookId].length);
+		$('#edit_book_author_name_char_count').html(30 - arr_book_author_name[editBookId].length);
+		
 	});
 	
 	$('#edit_book_title').keyup(function(){

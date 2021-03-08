@@ -35,4 +35,4 @@
 ### 4. Delete Book
 <img src="main/ss/04SS.png" height="450" />
 
-# Thanks for Watching. More Coming Soon.
+# Thanks for Watching.

@@ -3,7 +3,7 @@
 - Exploring <b>BootStrap 5 (v5.0.0-beta1)</b>.
 - ES based Test project.
 
-<img src="main/ss/00Wall.png" height="450" />
+<img src="ss/00Wall.png" height="450" />
 
 ### Current Features
 - [x] Add Book

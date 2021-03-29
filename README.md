@@ -35,4 +35,4 @@
 ### 4. Delete Book
 <img src="ss/04SS.png" height="450" />
 
-# Thank you for Checking it Out
+# Thank you
